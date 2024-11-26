@@ -1,11 +1,3 @@
-export const PRODUCT_COLOR_MAPPING = {
-  UREA: "#0088FE",
-  DAP: "#00C49F",
-  MOP: "#FFBB28",
-  NPK: "#FF8042",
-  ZINC: "#FF0000",
-};
-
 export const STATES = [
   "Andaman & Nicobar",
   "Andhra Pradesh",

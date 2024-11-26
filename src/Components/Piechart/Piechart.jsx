@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { getPieData } from "../../utils/helpers";
-import { PRODUCT_COLOR_MAPPING } from "../../utils/constants";
+import { data } from "../../utils/data";
 
 import "./Piechart.css";
 
@@ -29,6 +29,21 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
+
+const products = [...new Set(data.map((item) => item.product))];
+
+const generateColorMap = (products) => {
+  const colorMap = {};
+  products.forEach((product) => {
+    colorMap[product] = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+      Math.random() * 256
+    )}, ${Math.floor(Math.random() * 256)})`;
+  });
+  return colorMap;
+};
+
+const PRODUCT_COLOR_MAPPING = generateColorMap(products);
+
 function Piechart({ data, title, dataKey }) {
   let chartData = getPieData(data, dataKey);
   return (
