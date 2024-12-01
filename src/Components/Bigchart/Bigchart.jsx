@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MONTHS, STATES } from "../../utils/constants";
+import { STATES } from "../../utils/constants";
 import "./Bigchart.css";
 
 import {
@@ -14,15 +14,17 @@ import {
 } from "recharts";
 
 function Bigchart({ title, data }) {
+  const productList = [...new Set(data.map((item) => item.product))];
+
   const [stateValue, setStateValue] = useState(STATES[0]);
-  const [monthValue, setMonthValue] = useState(MONTHS[0]);
+  const [productValue, setProductValue] = useState(productList[0]);
 
   const OnchangeSetStateValue = (e) => setStateValue(e.target.value);
-  const OnchangeSetMonthValue = (e) => setMonthValue(e.target.value);
+  const onChangeProductValue = (e) => setProductValue(e.target.value);
 
   const chartData = useMemo(() => {
     const filteredData = data.filter(
-      (obj) => obj["state"] === stateValue && obj["month"] === monthValue
+      (obj) => obj["state"] === stateValue && obj["product"] === productValue
     );
 
     return filteredData.map((element) => ({
@@ -30,23 +32,23 @@ function Bigchart({ title, data }) {
       requirement_in_mt_: parseFloat(element["requirement_in_mt_"]),
       availability_in_mt_: parseFloat(element["availability_in_mt_"]),
     }));
-  }, [data, stateValue, monthValue]);
+  }, [data, stateValue, productValue]);
 
   return (
     <div className="bigchart">
       <h3 className="bigchartTitle">{title}</h3>
 
       <div className="bigchartSelect">
-        <h5>Month</h5>
+        <h5>Product</h5>
         <select
-          name="month"
-          onChange={OnchangeSetMonthValue}
-          value={monthValue}
-          aria-label="Month"
+          name="product"
+          onChange={onChangeProductValue}
+          value={productValue}
+          aria-label="Product"
         >
-          {MONTHS.map((month) => (
-            <option key={month} value={month}>
-              {month}
+          {productList.map((product) => (
+            <option key={product} value={product}>
+              {product}
             </option>
           ))}
         </select>
@@ -80,7 +82,7 @@ function Bigchart({ title, data }) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="product" />
+          <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Legend />

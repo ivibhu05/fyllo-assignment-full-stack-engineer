@@ -16,7 +16,19 @@ import {
 function Chart({ title, data, parent, child, subtitle, defaultValue }) {
   let a = getData(data, parent, child);
 
-  const [view, setView] = useState(defaultValue[parent]);
+  console.log(defaultValue);
+
+  const [view, setView] = useState(
+    defaultValue[parent] || {
+      _year: "2015-2016",
+      month: "April",
+      product: "DAP",
+      state: "Andaman & Nicobar",
+      requirement_in_mt_: "0",
+      availability_in_mt_: "0",
+      id: 1,
+    }
+  );
 
   function OnchangeSetView(e) {
     setView(e.target.value);

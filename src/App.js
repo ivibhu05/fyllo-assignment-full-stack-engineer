@@ -1,11 +1,12 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductList from "./Pages/ProductList";
 import Sidebar from "./Components/Sidebar";
 import Topbar from "./Components/Topbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import Home from "./Pages/Home";
-
 import "./App.css";
+import socketIO from "socket.io-client";
+
+const socket = socketIO("http://localhost:8001");
 
 function App() {
   return (
@@ -14,14 +15,10 @@ function App() {
         <Topbar />
         <div className="container">
           <Sidebar />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/product">
-              <ProductList />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" component={<Home />} />
+            <Route path="/product" component={<ProductList />} />
+          </Routes>
         </div>
       </Router>
     </div>
