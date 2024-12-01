@@ -4,11 +4,24 @@ import Sidebar from "./Components/Sidebar";
 import Topbar from "./Components/Topbar";
 import Home from "./Pages/Home";
 import "./App.css";
-import socketIO from "socket.io-client";
+import io from "socket.io-client";
+import { useEffect, useState } from "react";
 
-const socket = socketIO("http://localhost:8001");
+const socket = io("http://localhost:8000");
 
 function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    socket.on("message", (data) => {
+      setMessage(data);
+    });
+
+    return () => {
+      socket.off("message");
+    };
+  }, []);
+
   return (
     <div className="App">
       <Router>
@@ -16,8 +29,8 @@ function App() {
         <div className="container">
           <Sidebar />
           <Routes>
-            <Route path="/" component={<Home />} />
-            <Route path="/product" component={<ProductList />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/product" element={<ProductList />} />
           </Routes>
         </div>
       </Router>

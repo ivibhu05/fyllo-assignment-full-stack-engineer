@@ -23,7 +23,6 @@ export function getData(data, parent, child) {
 
   let states = {};
   for (let obj of data) {
-    console.log("first");
     if (!states.hasOwnProperty(obj[parent])) {
       states[obj[parent]] = {};
       states = findRepeated(obj[parent], obj[child], states);

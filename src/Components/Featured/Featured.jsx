@@ -8,13 +8,10 @@ import { useEffect, useState } from "react";
 function Featured() {
   const [data, setData] = useState([]);
 
-  console.log("data");
-
   useEffect(() => {
     fetch("http://localhost:8000/api/data")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched Data:", data);
         setData(data);
       })
       .catch((err) => console.error("Error fetching data:", err));
