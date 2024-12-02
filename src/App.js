@@ -10,15 +10,15 @@ import { useEffect, useState } from "react";
 const socket = io("http://localhost:8000");
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    socket.on("message", (data) => {
-      setMessage(data);
+    socket.on("data-updated", (updatedData) => {
+      setData(updatedData);
     });
 
     return () => {
-      socket.off("message");
+      socket.off("data-updated");
     };
   }, []);
 
@@ -29,7 +29,7 @@ function App() {
         <div className="container">
           <Sidebar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home data={data} />} />
             <Route path="/product" element={<ProductList />} />
           </Routes>
         </div>

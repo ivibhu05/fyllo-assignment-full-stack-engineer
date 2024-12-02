@@ -2,10 +2,10 @@ import React from "react";
 import Featured from "../../Components/Featured/Featured";
 import "./Home.css";
 
-function Home() {
+function Home({ data }) {
   return (
     <div className="home">
-      <Featured />
+      <Featured data={data} />
     </div>
   );
 }

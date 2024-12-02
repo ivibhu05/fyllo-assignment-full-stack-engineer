@@ -9,6 +9,15 @@ export const data = [
     id: 1,
   },
   {
+    _year: "2019-2020",
+    month: "April",
+    product: "XYz",
+    state: "Andaman & Nicobar",
+    requirement_in_mt_: "1000000000000",
+    availability_in_mt_: "1000000000",
+    id: 1,
+  },
+  {
     _year: "2015-2016",
     month: "April",
     product: "MAP",

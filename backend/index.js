@@ -29,6 +29,8 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
+  socket.emit("data-updated", data);
+
   socket.on("disconnect", () => {
     console.log("🔥: A user disconnected");
   });

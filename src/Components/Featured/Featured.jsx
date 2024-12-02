@@ -3,19 +3,19 @@ import "./Featured.css";
 import Chart from "../Chart/Chart";
 import Bigchart from "../Bigchart";
 import Piechart from "../Piechart";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-function Featured() {
-  const [data, setData] = useState([]);
+function Featured({ data }) {
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/data")
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/api/data")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setData(data);
+  //     })
+  //     .catch((err) => console.error("Error fetching data:", err));
+  // }, []);
 
   return (
     <div className="featured">
